@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const AppContainer = styled.div`
-  min-height: 100%;
+  min-height: 100vh;
   // background: linear-gradient(to right, #d0ecff, #ffe0eb);
   background: #d0ecff;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 `;
 
 export const Header = styled.header`
@@ -57,6 +58,7 @@ export const MooDang = styled.img`
   width: 200%;
   height: 200%;
   transform: translateY(-110px);
+  max-width: none;
 `;
 
 export const Main = styled.main`
