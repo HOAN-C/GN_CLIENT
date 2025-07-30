@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const AppContainer = styled.div`
-  min-height: 100vh;
+  min-height: 100%;
   // background: linear-gradient(to right, #d0ecff, #ffe0eb);
   background: #d0ecff;
   display: flex;
