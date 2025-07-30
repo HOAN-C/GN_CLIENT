@@ -48,3 +48,30 @@ ul,
 ol {
   list-style: none;
 }
+
+/* 스크린 리더 전용 클래스 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* 포커스 표시 개선 */
+*:focus {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}
+
+/* 키보드 네비게이션 지원 */
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}

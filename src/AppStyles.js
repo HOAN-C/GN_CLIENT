@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const AppContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(to right, #d0ecff, #ffe0eb);
+  // background: linear-gradient(to right, #d0ecff, #ffe0eb);
+  background: #d0ecff;
   display: flex;
   flex-direction: column;
 `;
@@ -19,12 +20,37 @@ export const Header = styled.header`
 export const MooDangHouse = styled.div`
   width: 200px;
   height: 200px;
-  background-color: #ffffff;
+  // background-color:rgb(231, 141, 141);
   border-radius: 50%;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
+
+  background-color: none;
+  box-shadow: none;
+  margin-bottom: -60px;
+
+  animation: ${(props) =>
+    props.$isHappy ? "jump 1.6s ease-out infinite" : "none"};
+
+  @keyframes jump {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-25px) rotate(-20deg);
+    }
+    50% {
+      transform: translateY(0) rotate(0deg);
+    }
+    75% {
+      transform: translateY(-25px) rotate(20deg);
+    }
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+  }
 `;
 
 export const MooDang = styled.img`

@@ -9,7 +9,7 @@ import {
   Title,
 } from "./FormStyles";
 
-export default function EmailSubscribeForm(props) {
+export default function EmailSubscribeForm() {
   const [email, setEmail] = useState("");
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,16 +22,15 @@ export default function EmailSubscribeForm(props) {
     setLoading(true);
     try {
       const apiUrl = getApiUrl();
-      const res = await axios.post(`${apiUrl}${API_ENDPOINTS.subscribe}`, {
+      const res = await axios.post(`${apiUrl}${API_ENDPOINTS.unsubscribe}`, {
         email,
       });
       setMsg(
         res.data.success
-          ? "구독이 성공적으로 등록되었습니다! 🎉"
+          ? "구독이 취소되었습니다..🥺 다음에 만나요!"
           : res.data.error
       );
       if (res.data.success) {
-        props.onSuccess();
         setEmail("");
         setTimeout(() => setMsg(""), 3000);
       }
@@ -43,8 +42,11 @@ export default function EmailSubscribeForm(props) {
   };
 
   return (
-    <FormContainer role="form" aria-label="이메일 구독 신청 폼">
-      <Title id="form-title">이메일로 공지 요약을 받아보세요</Title>
+    <FormContainer role="form" aria-label="이메일 구독 취소 폼">
+      <Title id="form-title">
+        <span style={{ color: "rgb(251, 77, 77)" }}>구독 취소</span>할
+        이메일을 입력하세요
+      </Title>
       <EmailInput
         type="email"
         placeholder="📧 이메일 주소 입력"
@@ -69,7 +71,7 @@ export default function EmailSubscribeForm(props) {
         disabled={loading || email.length === 0}
         aria-describedby={loading ? "loading-status" : undefined}
       >
-        {loading ? "구독 중..." : "구독 신청"}
+        {loading ? "취소 중..." : "구독 취소"}
       </SubscribeButton>
     </FormContainer>
   );

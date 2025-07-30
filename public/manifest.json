@@ -1,0 +1,20 @@
+{
+  "name": "가천대 공지 알리미",
+  "short_name": "가천대 알리미",
+  "description": "무당이가 알려주는 가천대학교 핵심 공지사항",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4A90E2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "무당이.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "lang": "ko",
+  "dir": "ltr"
+}

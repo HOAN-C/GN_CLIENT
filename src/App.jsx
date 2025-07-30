@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import EmailSubscribeForm from "./components/EmailSubscribeForm";
-import Typewriter from "typewriter-effect";
+import EmailUnsubscribeForm from "./components/EmailUnsubscribeForm";
+import MoodangComment from "./components/MoodangComment";
+
+import axios from "axios";
+import { getApiUrl, API_ENDPOINTS } from "./config/api";
 import {
   AppContainer,
   Header,
@@ -8,13 +12,33 @@ import {
   MooDang,
   Main,
   MooDangComment,
-} from "./styles/AppStyles";
+} from "./AppStyles";
 import 무당이 from "./images/무당이.png";
 import 무당이2 from "./images/무당이_speaking.png";
+import Footer from "./components/Footer";
+import HappyMoodang from "./components/HappyMoodang";
 
 function App() {
   const [isTyping, setIsTyping] = useState(false);
   const [currentImage, setCurrentImage] = useState(무당이);
+  const [showUnsubscribeForm, setShowUnsubscribeForm] = useState(false);
+  const [subScriberCount, setSubScriberCount] = useState(0);
+  const [MoodangIsHappy, setMoodangIsHappy] = useState(false);
+
+  useEffect(() => {
+    const fetchSubscriberCount = async () => {
+      const apiUrl = getApiUrl();
+      const res = await axios.get(`${apiUrl}${API_ENDPOINTS.subscribers}`);
+      setSubScriberCount(res.data.count);
+    };
+    fetchSubscriberCount();
+  }, []);
+
+  useEffect(() => {
+    if (MoodangIsHappy) {
+      setShowUnsubscribeForm(false);
+    }
+  }, [MoodangIsHappy]);
 
   useEffect(() => {
     let interval;
@@ -34,45 +58,52 @@ function App() {
   return (
     <AppContainer>
       <Header>
-        <MooDangHouse>
-          <MooDang src={currentImage} alt="무당이" />
+        <h1 style={{ display: "none" }}>가천대 공지 알리미</h1>
+        <MooDangHouse $isHappy={MoodangIsHappy}>
+          <MooDang
+            src={currentImage}
+            alt="무당이 캐릭터 - 가천대 공지 알리미 마스코트"
+          />
         </MooDangHouse>
       </Header>
       <Main>
-        <MooDangComment>
-          <Typewriter
-            onInit={(typewriter) => {
-              typewriter
-                .callFunction(() => setIsTyping(true))
-                .typeString("무당이가 알려주는 가천대 공지사항")
-                .pauseFor(400)
-                .callFunction(() => setIsTyping(false))
-                .pauseFor(1000)
-                .deleteAll()
-                .callFunction(() => setIsTyping(true))
-                .typeString("핵심만 쏙쏙 요약해드려요!")
-                .pauseFor(400)
-                .callFunction(() => setIsTyping(false))
-                .pauseFor(1000)
-                .deleteAll()
-                .callFunction(() => setIsTyping(true))
-                .typeString("이메일 주소만 입력하면 끝!")
-                .pauseFor(400)
-                .callFunction(() => setIsTyping(false))
-                .pauseFor(1000)
-                .deleteAll()
-                .start();
-            }}
-            options={{
-              delay: 60,
-              cursor: "|",
-              loop: true,
-              autoStart: true,
-            }}
+        {MoodangIsHappy ? (
+          <HappyMoodang
+            count={subScriberCount}
+            onClose={() => setMoodangIsHappy(false)}
           />
-        </MooDangComment>
+        ) : (
+          <>
+            <MoodangComment
+              subScriberCount={subScriberCount}
+              setIsTyping={setIsTyping}
+            />
 
-        <EmailSubscribeForm />
+            {showUnsubscribeForm ? (
+              <EmailUnsubscribeForm />
+            ) : (
+              <EmailSubscribeForm onSuccess={() => setMoodangIsHappy(true)} />
+            )}
+
+            {showUnsubscribeForm ? (
+              <button
+                style={{ marginTop: "10px", color: "rgb(59, 60, 70)" }}
+                onClick={() => setShowUnsubscribeForm(false)}
+              >
+                구독 신청
+              </button>
+            ) : (
+              <button
+                style={{ marginTop: "10px", color: "rgb(59, 60, 70)" }}
+                onClick={() => setShowUnsubscribeForm(true)}
+              >
+                구독 취소
+              </button>
+            )}
+          </>
+        )}
+
+        <Footer />
       </Main>
     </AppContainer>
   );

@@ -1,14 +1,14 @@
 const API_CONFIG = {
   development: "http://localhost:5001",
-  production: "https://gn-server-production.up.railway.app",
+  production: "http://3.27.187.244:5000",
 };
 
 export const getApiUrl = () => {
-  const env = import.meta.env.MODE || "development";
+  const env = import.meta.env.MODE;
   return API_CONFIG[env] || API_CONFIG.development;
 };
 
-export const ㅊ = {
+export const API_ENDPOINTS = {
   subscribe: "/api/subscribe",
   unsubscribe: "/api/unsubscribe",
   subscribers: "/api/subscribers",

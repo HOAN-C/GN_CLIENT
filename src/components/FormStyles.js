@@ -14,7 +14,8 @@ export const FormContainer = styled.div`
 export const Title = styled.h2`
   color: #333;
   margin-bottom: 10px;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: 600;
 `;
 
 export const EmailInput = styled.input`
@@ -24,6 +25,7 @@ export const EmailInput = styled.input`
   border-radius: 6px;
   font-size: 16px;
   font-family: inherit;
+  text-align: center;
 
   &:focus {
     outline: none;
@@ -35,19 +37,20 @@ export const EmailInput = styled.input`
 export const Message = styled.p`
   margin-top: 10px;
   font-size: 14px;
-  color: ${(props) => (props.success ? "#28a745" : "#dc3545")};
+  color: ${(props) => (props.$success ? "#28a745" : "#dc3545")};
 `;
 
 export const SubscribeButton = styled.button`
   margin-top: 15px;
   padding: 12px 24px;
-  background-color: #23499e;
   color: white;
   border: none;
   border-radius: 6px;
   font-size: 16px;
   font-weight: 600;
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  background-color: ${(props) =>
+    props.disabled ? "rgb(59, 60, 70)" : "#23499e"};
   opacity: ${(props) => (props.disabled ? 0.7 : 1)};
   transition: background-color 0.2s;
 
