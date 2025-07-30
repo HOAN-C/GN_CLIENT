@@ -1,6 +1,6 @@
 const API_CONFIG = {
   development: "http://localhost:5001",
-  production: "http://3.27.187.244:5000",
+  production: "https://api.gachonnotifier.site",
 };
 
 export const getApiUrl = () => {
