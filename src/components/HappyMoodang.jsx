@@ -7,9 +7,7 @@ import {
 const HappyMoodang = (props) => {
   return (
     <HappyMoodangContainer>
-      <HappyMoodangTitle>
-        🎉 무당이 친구가 되어줘서 고마워요! 🎉
-      </HappyMoodangTitle>
+      <HappyMoodangTitle>🎉 친구가 되어줘서 고마워요! 🎉</HappyMoodangTitle>
       <Button onClick={props.onClose}>돌아가기</Button>
     </HappyMoodangContainer>
   );
