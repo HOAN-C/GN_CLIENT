@@ -11,6 +11,6 @@ export const getApiUrl = () => {
 export const API_ENDPOINTS = {
   subscribe: "/api/subscribe",
   unsubscribe: "/api/unsubscribe",
-  subscribers: "/api/subscribers",
+  subscriberCount: "/api/subscriber/count",
   health: "/api/health",
 };

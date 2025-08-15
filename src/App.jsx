@@ -28,7 +28,7 @@ function App() {
   useEffect(() => {
     const fetchSubscriberCount = async () => {
       const apiUrl = getApiUrl();
-      const res = await axios.get(`${apiUrl}${API_ENDPOINTS.subscribers}`);
+      const res = await axios.get(`${apiUrl}${API_ENDPOINTS.subscriberCount}`);
       setSubScriberCount(res.data.count);
     };
     fetchSubscriberCount();
